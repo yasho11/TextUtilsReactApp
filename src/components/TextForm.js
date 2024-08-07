@@ -7,34 +7,40 @@ export default function TextForm(props) {
         console.log("Convert to uppercase pressed");
         let newText = text.toUpperCase();
         setText(newText);
+        props.ShowAlert("Converted to Uppercase!!","success");
     }
 
     const handleLowClick = () => {
         console.log("Convert to lowercase pressed");
         let newText = text.toLowerCase();
         setText(newText);
+        props.ShowAlert("Converted to Lowercase!!","success");
     }
 
     const reverseString = () => {
         let newText = text.split('').reverse().join('');
         setText(newText);
+        props.ShowAlert("Text has been reversed","success");
     }
 
     const removeExtraSpaces = () => {
         let newText = text.trim().replace(/\s+/g, ' ');
         setText(newText);
+        props.ShowAlert("Extra spaces Removed!","success");
     }
 
     const extractEmail = () => {
         const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
         let newText = text.match(emailPattern) || [];
         setText(newText.join(', '));
+        props.ShowAlert("Email Extarcted","success");
     }
     const handleCopyClick = () => {
         navigator.clipboard.writeText(text).then(() => {
-            console.log("Text copied to clipboard");
+            props.ShowAlert("Text copied to clipboard","success");
         }).catch((err) => {
             console.error("Failed to copy text: ", err);
+            props.ShowAlert("Failed to copy text","danger");
         });
     }
 
@@ -42,6 +48,7 @@ export default function TextForm(props) {
         console.log("Clear text pressed");
         let newText = "";
         setText(newText);
+        props.ShowAlert("Text cleared","danger");
     }
 
     const handleOnChange = (event) => {
